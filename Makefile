@@ -6,7 +6,7 @@
 #    By: rarodrig < rarodrig@student.42sp.org.br    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/08 19:41:29 by rarodrig          #+#    #+#              #
-#    Updated: 2022/02/21 21:17:40 by rarodrig         ###   ########.fr        #
+#    Updated: 2022/02/24 22:16:50 by rarodrig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 LEAK = -fsanitize=address
 
-FILE =	$(PATH_SRC)philosophers.c $(PATH_UTILS)utils.c $(PATH_UTILS)utils_dinner.c\
+FILE =	$(PATH_SRC)philosophers.c $(PATH_UTILS)utils.c $(PATH_UTILS)utils_dinner.c  $(PATH_UTILS)prints_status.c\
 
 OBJ = $(patsubst $(PATH_SRC)%.c, $(PATH_OBJ)%.o, $(FILE))
 

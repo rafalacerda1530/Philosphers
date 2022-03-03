@@ -6,28 +6,42 @@
 /*   By: rarodrig < rarodrig@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 20:39:23 by rarodrig          #+#    #+#             */
-/*   Updated: 2022/02/21 22:18:56 by rarodrig         ###   ########.fr       */
+/*   Updated: 2022/02/24 23:24:47 by rarodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int died(t_philo *philo)
+void *died(void *param)
 {
 	int i;
+	t_main *main;
 
-	i = 0;
-
-	while (i < philo->st_main->numb_philos)
+	main = param;
+	i = -1;
+	while (++i < main->numb_philos)
 	{
-		printf("id = %d / time = %ld\n",philo->st_main->philo[i].n_philo, get_time() - philo->st_main->philo[i].last_meal);
-		if (get_time() - philo->st_main->philo[i].last_meal > philo->st_main->time_die)
+		if (get_time() - main->philo[i].last_meal > main->time_die)
 		{
-			printf("Morreu = %d", philo->st_main->philo[i].n_philo);
-			// free(philo);
-			exit (1);
+			print_status(get_time(), main->philo, "Morreu féla da pota");
+			main->teste = 1;
+			return(	NULL);
 		}
-		i++;
+		if (i+1 == main->numb_philos)
+			i = -1;
 	}
-	return(0);
+	return(NULL);
+}
+
+void eat(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->st_main->forks[philo->left_fork]);
+	pthread_mutex_lock(&philo->st_main->forks[philo->right_fork]);
+	philo->last_meal = get_time();
+	print_status(get_time(), philo, "Pegou o garfo");
+	usleep(philo->st_main->time_eat * 1000);
+	print_status(get_time(), philo, "Liberou o garfo");
+	pthread_mutex_unlock(&philo->st_main->forks[philo->left_fork]);
+	pthread_mutex_unlock(&philo->st_main->forks[philo->right_fork]);
+	philo->numb_of_meals++;
 }
