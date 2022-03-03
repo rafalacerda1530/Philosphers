@@ -6,7 +6,7 @@
 /*   By: rarodrig < rarodrig@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 20:39:23 by rarodrig          #+#    #+#             */
-/*   Updated: 2022/02/24 23:24:47 by rarodrig         ###   ########.fr       */
+/*   Updated: 2022/03/03 20:27:23 by rarodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void eat(t_philo *philo)
 	pthread_mutex_lock(&philo->st_main->forks[philo->left_fork]);
 	pthread_mutex_lock(&philo->st_main->forks[philo->right_fork]);
 	philo->last_meal = get_time();
-	print_status(get_time(), philo, "Pegou o garfo");
+	print_status(get_time(), philo, "Comendo");
 	usleep(philo->st_main->time_eat * 1000);
 	print_status(get_time(), philo, "Liberou o garfo");
 	pthread_mutex_unlock(&philo->st_main->forks[philo->left_fork]);

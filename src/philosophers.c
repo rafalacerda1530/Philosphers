@@ -6,7 +6,7 @@
 /*   By: rarodrig < rarodrig@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 19:46:12 by rarodrig          #+#    #+#             */
-/*   Updated: 2022/03/03 19:39:40 by rarodrig         ###   ########.fr       */
+/*   Updated: 2022/03/03 20:22:25 by rarodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int	main(int argc, char **argv)
 	(void)argv;
 	if (argc < 5 || argc > 6)
 		ft_error();
+	main.start_meal = get_time();
 	start_struct(&main, argc, argv);
 	create_philo(&main);
 	pthread_create(&main.monitor, NULL, &died, &main);

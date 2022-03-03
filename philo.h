@@ -30,6 +30,7 @@ struct s_main
 	int	teste;
 	int	time_sleep;
 	int numb_meal;
+	long int start_meal;
 	t_philo	*philo;
 	pthread_t	monitor;
 	pthread_mutex_t *forks;
