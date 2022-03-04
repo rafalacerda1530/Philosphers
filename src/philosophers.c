@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rarodrig < rarodrig@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 19:46:12 by rarodrig          #+#    #+#             */
-/*   Updated: 2022/03/04 01:03:54 by coder            ###   ########.fr       */
+/*   Updated: 2022/03/04 19:22:43 by rarodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void  start_struct(t_main *main, int argc, char **argv)
 	main->forks = NULL;
 	main->philo = malloc(sizeof(t_philo) * main->numb_philos);
 	main->forks = malloc(main->numb_philos * sizeof(pthread_mutex_t));
+	main->ate_meal = 0;
 	ft_bzero(main->philo, sizeof(t_philo));
 	return(philo_info(main));
 }

@@ -11,7 +11,6 @@ typedef struct s_main		t_main;
 
 typedef struct s_philo
 {
-	int	time;
 	int	left_fork;
 	int	right_fork;
 	int n_philo;
@@ -31,6 +30,7 @@ struct s_main
 	int	time_sleep;
 	int numb_meal;
 	long int start_meal;
+	int	ate_meal;
 	t_philo	*philo;
 	pthread_t	monitor;
 	pthread_mutex_t *forks;

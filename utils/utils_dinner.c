@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_dinner.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rarodrig < rarodrig@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 20:39:23 by rarodrig          #+#    #+#             */
-/*   Updated: 2022/03/04 01:07:41 by coder            ###   ########.fr       */
+/*   Updated: 2022/03/04 19:40:39 by rarodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
+
 
 void *died(void *param)
 {
@@ -26,6 +28,13 @@ void *died(void *param)
 			print_status(get_time(), main->philo, "Morreu féla da pota");
 			main->teste = 1;
 			return(	NULL);
+		}
+		if (main->philo[i].numb_of_meals >= main->numb_meal)
+			main->ate_meal++;
+		if (main->ate_meal >= main->numb_philos)
+		{
+			main->teste = 1;
+			return(NULL);
 		}
 		if (i+1 == main->numb_philos)
 			i = -1;
