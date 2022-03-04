@@ -6,7 +6,7 @@
 /*   By: rarodrig < rarodrig@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 19:46:12 by rarodrig          #+#    #+#             */
-/*   Updated: 2022/03/04 19:54:21 by rarodrig         ###   ########.fr       */
+/*   Updated: 2022/03/04 20:06:32 by rarodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ void philo_info(t_main *main)
 void  start_struct(t_main *main, int argc, char **argv)
 {
 	main->numb_philos = ft_atoi(argv[1]);
+	if (main->numb_philos < 1)
+	{
+		printf("Error, numb of philos is less than 1\n");
+		exit(0);
+	}
 	main->time_die = ft_atoi(argv[2]);
 	main->time_eat = ft_atoi(argv[3]);
 	main->time_sleep = ft_atoi(argv[4]);
@@ -55,22 +60,22 @@ void  start_struct(t_main *main, int argc, char **argv)
 
 void *one_philo(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->st_main->forks[philo->left_fork]);
 	pthread_mutex_lock(&philo->st_main->forks[philo->right_fork]);
 	philo->last_meal = get_time();
 	print_status(get_time(), philo, "has taken a fork");
-	print_status(get_time(), philo, "has taken a fork");
 	print_status(get_time(), philo, "is eating");
 	usleep(philo->st_main->time_eat * 1000);
-	pthread_mutex_unlock(&philo->st_main->forks[philo->left_fork]);
 	pthread_mutex_unlock(&philo->st_main->forks[philo->right_fork]);
+	print_status(get_time(), philo, "DIED");
+	philo->st_main->teste = 1;
+	return(NULL);
 }
 
 void *routine(void *param)
 {
 	t_philo *philo;
 	philo = param;
-	
+
 	if (philo->st_main->numb_philos == 1)
 		return(one_philo(philo));
 	if (philo->n_philo % 2 == 0)
