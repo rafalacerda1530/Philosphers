@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarodrig < rarodrig@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 19:46:12 by rarodrig          #+#    #+#             */
-/*   Updated: 2022/03/04 19:22:43 by rarodrig         ###   ########.fr       */
+/*   Updated: 2022/03/04 23:50:00 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ void *routine(void *param)
 	while (philo->st_main->teste != 1)
 	{
 		eat(philo);
-		print_status(get_time(), philo, "Começou dormir");
+		print_status(get_time(), philo, "is sleeping");
 		usleep(philo->st_main->time_sleep * 1000);
+		print_status(get_time(), philo, "is thinking");
 	}
 	return NULL;
 }
