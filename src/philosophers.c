@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rarodrig < rarodrig@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 19:46:12 by rarodrig          #+#    #+#             */
-/*   Updated: 2022/03/04 23:50:00 by coder            ###   ########.fr       */
+/*   Updated: 2022/03/04 19:54:21 by rarodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,26 @@ void  start_struct(t_main *main, int argc, char **argv)
 	return(philo_info(main));
 }
 
+void *one_philo(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->st_main->forks[philo->left_fork]);
+	pthread_mutex_lock(&philo->st_main->forks[philo->right_fork]);
+	philo->last_meal = get_time();
+	print_status(get_time(), philo, "has taken a fork");
+	print_status(get_time(), philo, "has taken a fork");
+	print_status(get_time(), philo, "is eating");
+	usleep(philo->st_main->time_eat * 1000);
+	pthread_mutex_unlock(&philo->st_main->forks[philo->left_fork]);
+	pthread_mutex_unlock(&philo->st_main->forks[philo->right_fork]);
+}
+
 void *routine(void *param)
 {
 	t_philo *philo;
 	philo = param;
 	
+	if (philo->st_main->numb_philos == 1)
+		return(one_philo(philo));
 	if (philo->n_philo % 2 == 0)
 			usleep(1600);
 	while (philo->st_main->teste != 1)
