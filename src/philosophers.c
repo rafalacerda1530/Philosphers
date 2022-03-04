@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarodrig < rarodrig@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 19:46:12 by rarodrig          #+#    #+#             */
-/*   Updated: 2022/03/03 20:22:25 by rarodrig         ###   ########.fr       */
+/*   Updated: 2022/03/04 01:03:54 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,15 @@ void *routine(void *param)
 {
 	t_philo *philo;
 	philo = param;
-
+	
 	if (philo->n_philo % 2 == 0)
-		usleep(1600);
+			usleep(1600);
 	while (philo->st_main->teste != 1)
 	{
 		eat(philo);
 		print_status(get_time(), philo, "Começou dormir");
 		usleep(philo->st_main->time_sleep * 1000);
 	}
-
 	return NULL;
 }
 
@@ -74,8 +73,13 @@ int create_philo(t_main *main)
 	int i;
 
 	i = -1;
+
 	while (++i < main->numb_philos)
+	{
+		// if (main->philo[i].n_philo % 2 == 0)
+		// 	usleep(1000);
 		pthread_create(&main->philo[i].thread, NULL, &routine, &main->philo[i]);
+	}
 	return (1);
 }
 

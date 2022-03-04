@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_dinner.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarodrig < rarodrig@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 20:39:23 by rarodrig          #+#    #+#             */
-/*   Updated: 2022/03/03 20:27:23 by rarodrig         ###   ########.fr       */
+/*   Updated: 2022/03/04 01:07:41 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void *died(void *param)
 		}
 		if (i+1 == main->numb_philos)
 			i = -1;
+		usleep(1600);
 	}
 	return(NULL);
 }
