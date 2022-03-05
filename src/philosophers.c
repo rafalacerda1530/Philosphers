@@ -3,31 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarodrig < rarodrig@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 19:46:12 by rarodrig          #+#    #+#             */
-/*   Updated: 2022/03/04 20:06:32 by rarodrig         ###   ########.fr       */
+/*   Updated: 2022/03/05 01:18:28 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../philo.h"
 
-pthread_mutex_t mutex;
-
-void philo_info(t_main *main)
+void	philo_info(t_main *main)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < main->numb_philos)
 	{
 		main->philo[i].n_philo = i + 1;
 		main->philo[i].left_fork = i;
-		main->philo[i].right_fork = i + 1;  
+		main->philo[i].right_fork = i + 1;
 		main->philo[i].st_main = main;
 		main->philo[i].last_meal = get_time();
-		main->philo[i].numb_of_meals = 0;
+		main->philo[i].n_meals = 0;
 		if (i + 1 == main->numb_philos)
 			main->philo[i].right_fork = 0;
 		pthread_mutex_init(&main->forks[i], NULL);
@@ -35,7 +32,7 @@ void philo_info(t_main *main)
 	}
 }
 
-void  start_struct(t_main *main, int argc, char **argv)
+void	start_struct(t_main *main, int argc, char **argv)
 {
 	main->numb_philos = ft_atoi(argv[1]);
 	if (main->numb_philos < 1)
@@ -55,63 +52,46 @@ void  start_struct(t_main *main, int argc, char **argv)
 	main->forks = malloc(main->numb_philos * sizeof(pthread_mutex_t));
 	main->ate_meal = 0;
 	ft_bzero(main->philo, sizeof(t_philo));
-	return(philo_info(main));
+	return (philo_info(main));
 }
 
-void *one_philo(t_philo *philo)
+void	*routine(void *param)
 {
-	pthread_mutex_lock(&philo->st_main->forks[philo->right_fork]);
-	philo->last_meal = get_time();
-	print_status(get_time(), philo, "has taken a fork");
-	print_status(get_time(), philo, "is eating");
-	usleep(philo->st_main->time_eat * 1000);
-	pthread_mutex_unlock(&philo->st_main->forks[philo->right_fork]);
-	print_status(get_time(), philo, "DIED");
-	philo->st_main->teste = 1;
-	return(NULL);
-}
+	t_philo	*philo;
 
-void *routine(void *param)
-{
-	t_philo *philo;
 	philo = param;
-
 	if (philo->st_main->numb_philos == 1)
-		return(one_philo(philo));
+		return (one_philo(philo));
 	if (philo->n_philo % 2 == 0)
-			usleep(1600);
-	while (philo->st_main->teste != 1)
+		usleep(1600);
+	while (philo->st_main->checker != 1)
 	{
 		eat(philo);
 		print_status(get_time(), philo, "is sleeping");
 		usleep(philo->st_main->time_sleep * 1000);
 		print_status(get_time(), philo, "is thinking");
+		philo->n_meals++;
 	}
-	return NULL;
+	return (NULL);
 }
 
-int create_philo(t_main *main)
-{ 
-	int i;
+int	create_philo(t_main *main)
+{
+	int	i;
 
 	i = -1;
-
 	while (++i < main->numb_philos)
-	{
-		// if (main->philo[i].n_philo % 2 == 0)
-		// 	usleep(1000);
 		pthread_create(&main->philo[i].thread, NULL, &routine, &main->philo[i]);
-	}
 	return (1);
 }
 
 int	main(int argc, char **argv)
 {
-	t_main main;
-	int i = 0;
+	t_main	main;
+	int		i;
+
+	i = 0;
 	pthread_mutex_init(&main.print, NULL);
- 
-	(void)argv;
 	if (argc < 5 || argc > 6)
 		ft_error();
 	main.start_meal = get_time();

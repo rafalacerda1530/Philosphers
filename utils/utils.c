@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarodrig < rarodrig@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 23:35:07 by rarodrig          #+#    #+#             */
-/*   Updated: 2022/02/18 21:49:44 by rarodrig         ###   ########.fr       */
+/*   Updated: 2022/03/05 00:26:24 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_isdigit(int c)
 	return (1);
 }
 
-int ft_error(void)
+int	ft_error(void)
 {
 	printf("Error\n");
 	exit (1);
@@ -71,12 +71,12 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-long int    get_time(void)
+long int	get_time(void)
 {
-    struct timeval    tv;
-    long int        milliseconds;
+	struct timeval	tv;
+	long int		milliseconds;
 
-    gettimeofday(&tv, NULL);
-    milliseconds = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-    return (milliseconds);
+	gettimeofday(&tv, NULL);
+	milliseconds = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	return (milliseconds);
 }
