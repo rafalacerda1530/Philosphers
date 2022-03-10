@@ -1,6 +1,10 @@
 # # Philosophers
 I’ve never thought philosophy would be so deadly.
 
+# flowchart
+Here's a link to the process flowchart:
+https://miro.com/app/board/uXjVOUjzO5Q=/
+
 # Introduction 
 In this project, you will learn the basics of threading a process. You will
 learn how to make threads. You will discover the mutex.
