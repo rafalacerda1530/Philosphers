@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 20:39:23 by rarodrig          #+#    #+#             */
-/*   Updated: 2022/03/05 01:18:01 by coder            ###   ########.fr       */
+/*   Updated: 2022/03/10 02:46:39 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ void	*one_philo(t_philo *philo)
 	pthread_mutex_lock(&philo->st_main->forks[philo->right_fork]);
 	philo->last_meal = get_time();
 	print_status(get_time(), philo, "has taken a fork");
-	print_status(get_time(), philo, "is eating");
-	usleep(philo->st_main->time_eat * 1000);
 	pthread_mutex_unlock(&philo->st_main->forks[philo->right_fork]);
 	print_status(get_time(), philo, "DIED");
 	philo->st_main->checker = 1;
